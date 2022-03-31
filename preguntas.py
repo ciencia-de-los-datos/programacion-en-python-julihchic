@@ -45,25 +45,19 @@ def pregunta_02():
 
     """
     data = open('data.csv','r').readlines()
-    
-
-    data = [z.replace('\n',' ') for z in data]
-    data = [z.replace('\t',' ') for z in data]
-
-    dict={}
+    contador={}
+    tupla = []
 
     for i in data:
-        mi_lista= i[0] 
-    if mi_lista in dict.keys():
-        dict[mi_lista]= dict[mi_lista]+ 1
-    else:
-        dict[mi_lista] = 1
+        mi_lista= i[0]
+        if mi_lista in contador.keys():
+            contador[mi_lista]= contador[mi_lista]+ 1
+        else:
+            contador[mi_lista] = 1
+        tupla=list(zip(contador.keys(),contador.values()))
+        tupla.sort()
         
-    dict
-
-
-    return
-
+    return tupla
 
 def pregunta_03():
     """
