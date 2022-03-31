@@ -74,15 +74,25 @@ def pregunta_03():
     ]
 
     """
+    data = open('data.csv','r').readlines()
+    data=[z.replace('\n','') for z in data]
+    data = [z.replace('\t','') for z in data]
 
-    
+    suma={}
+    tupla=[]
 
 
- 
+    for i in data:
+        mi_tupla= i[0]
+        col1=int(i[1])
+        if mi_tupla in suma.keys():
+            suma[mi_tupla]= suma[mi_tupla]+ col1
+        else:
+            suma[mi_tupla]= col1
+        tupla=list(zip(suma.keys(),suma.values()))
+        tupla.sort()
+    return tupla
 
-
-
-    return
 
 
 def pregunta_04():
