@@ -21,7 +21,12 @@ def pregunta_01():
     214
 
     """
-    return
+
+    data = open('data.csv','r').readlines()
+    col2 = [int(row[2]) for row in data]
+
+    suma = sum(col2)
+    return suma
 
 
 def pregunta_02():
@@ -39,6 +44,24 @@ def pregunta_02():
     ]
 
     """
+    data = open('data.csv','r').readlines()
+    
+
+    data = [z.replace('\n',' ') for z in data]
+    data = [z.replace('\t',' ') for z in data]
+
+    dict={}
+
+    for i in data:
+        mi_lista= i[0] 
+    if mi_lista in dict.keys():
+        dict[mi_lista]= dict[mi_lista]+ 1
+    else:
+        dict[mi_lista] = 1
+        
+    dict
+
+
     return
 
 
@@ -57,6 +80,14 @@ def pregunta_03():
     ]
 
     """
+
+    
+
+
+ 
+
+
+
     return
 
 
