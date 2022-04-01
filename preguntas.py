@@ -117,7 +117,25 @@ def pregunta_04():
     ]
 
     """
-    return
+    data = open('data.csv','r').readlines()
+    data=[z.replace('\n','') for z in data]
+    data=[z.replace('\t',';') for z in data]
+    data=[z.split(';') for z in data]
+
+    tupla={}
+
+    for row in data:
+        vble=row[2].split('-')
+        mes=vble[1]
+        if mes in tupla.keys():
+            tupla[mes]=tupla[mes]+1
+        else:
+             tupla[mes]=1
+
+    tupla=list(zip(tupla.keys(), tupla.values()))
+    tupla.sort()
+
+    return tupla
 
 
 def pregunta_05():
