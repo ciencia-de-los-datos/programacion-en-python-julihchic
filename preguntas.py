@@ -156,10 +156,9 @@ def pregunta_05():
 
     from operator import itemgetter
     data = open('data.csv','r').readlines()
+    data = [row.split('\t') for row in data]
+    data = [row[:2] for row in data]
     
-    
-    data=[z.split('\t') for z in data]
-
     result ={}
 
     for letra, valor in data:
@@ -172,7 +171,7 @@ def pregunta_05():
         result=[(key, max(valor), min (valor)) for key, valor in result.items()]
         result= sorted (result, key=itemgetter(0), reverse=False)
 
-    return result
+    result
   
 
 
