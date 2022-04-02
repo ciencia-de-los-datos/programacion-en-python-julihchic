@@ -13,6 +13,9 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 """
 
 
+from operator import itemgetter
+
+
 def pregunta_01():
     """
     Retorne la suma de la segunda columna.
@@ -159,19 +162,19 @@ def pregunta_05():
     data = [row.split('\t') for row in data]
     data = [row[:2] for row in data]
     
-    result ={}
+    tupla ={}
 
     for letra, valor in data:
         valor = int(valor)
-        if letra in result.keys():
-            result[letra].append(valor)
+        if letra in tupla.key():
+            tupla[letra].append(valor)
         else:
-            result[letra]=[valor]
+            tupla[letra]=[valor]
+        tupla=[(key, max(valor), min (valor)) for key, valor in tupla.items()]
+        tupla = sorted(tupla, key=itemgetter(0), reverse=False)
 
-        result=[(key, max(valor), min (valor)) for key, valor in result.items()]
-        result= sorted (result, key=itemgetter(0), reverse=False)
+    return tupla
 
-    result
   
 
 
