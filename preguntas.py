@@ -153,7 +153,27 @@ def pregunta_05():
     ]
 
     """
-    return
+
+    from operator import itemgetter
+    data = open('data.csv','r').readlines()
+    
+    
+    data=[z.split('\t') for z in data]
+
+    result ={}
+
+    for letra, valor in data:
+        valor = int(valor)
+        if letra in result.keys():
+            result[letra].append(valor)
+        else:
+            result[letra]=[valor]
+
+        result=[(key, max(valor), min (valor)) for key, valor in result.items()]
+        result= sorted (result, key=itemgetter(0), reverse=False)
+
+    return result
+  
 
 
 def pregunta_06():
