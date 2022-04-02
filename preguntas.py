@@ -14,6 +14,7 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 from operator import itemgetter
+from unittest import result
 
 
 def pregunta_01():
@@ -159,21 +160,22 @@ def pregunta_05():
 
     from operator import itemgetter
     data = open('data.csv','r').readlines()
-    data = [row.split('\t') for row in data]
-    data = [row[:2] for row in data]
+    data=[z.replace('\n','') for z in data]
+    data=[z.replace('\t',';') for z in data]
+    data=[z.split(';') for z in data] 
     
-    tupla ={}
+    result ={}
 
     for letra, valor in data:
         valor = int(valor)
-        if letra in tupla.key():
-            tupla[letra].append(valor)
+        if letra in result.keys():
+            result[letra].append(valor)
         else:
-            tupla[letra]=[valor]
-        tupla=[(key, max(valor), min (valor)) for key, valor in tupla.items()]
-        tupla = sorted(tupla, key=itemgetter(0), reverse=False)
+            result[letra]=[valor]
+        result=[(key, max(valor), min (valor)) for key, valor in result.items()]
+        result = sorted(result, key=itemgetter(0), reverse=False)
 
-    return tupla
+    return result
 
   
 
