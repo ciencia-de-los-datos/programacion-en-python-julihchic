@@ -163,8 +163,9 @@ def pregunta_05():
     data=[z.replace('\n','') for z in data]
     data=[z.replace('\t',';') for z in data]
     data=[z.split(';') for z in data] 
-    
+        
     result ={}
+        
 
     for letra, valor in data:
         valor = int(valor)
@@ -172,14 +173,12 @@ def pregunta_05():
             result[letra].append(valor)
         else:
             result[letra]=[valor]
-        result=[(key, max(valor), min (valor)) for key, valor in result.items()]
-        result = sorted(result, key=itemgetter(0), reverse=False)
+    result=[(key, max(valor), min (valor))for key, valor in result.items()]
+    result= [result, key=itemgetter(0), reverse=False)]
 
-    return result
-
-  
-
-
+    result
+   
+ 
 def pregunta_06():
     """
     La columna 5 codifica un diccionario donde cada cadena de tres letras corresponde a
@@ -226,7 +225,25 @@ def pregunta_07():
     ]
 
     """
-    return
+    from operator import itemgetter
+    data = open('data.csv','r').readlines()
+    data=[z.replace('\n','') for z in data]
+    data=[z.replace('\t',';') for z in data]
+    data=[z.split(';') for z in data] 
+
+    datos_siete=[[row[1]]+[row[0]] for row in data]
+    result={}
+    for valor, letra in datos_siete:
+        if valor in result.keys():
+            result[valor].append(letra)
+        else:
+            result[valor]=[letra]
+
+    result=[(int(key), letra) for key, letra in result.items()]
+    result=sorted(result, key=itemgetter(0), reverse=False)
+    
+
+    return result
 
 
 def pregunta_08():
