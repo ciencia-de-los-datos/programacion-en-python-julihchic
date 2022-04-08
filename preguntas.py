@@ -25,6 +25,7 @@ def pregunta_01():
     214
 
     """
+    #OMG
 
     data = open('data.csv','r').readlines()
     col2 = [int(row[2]) for row in data]
@@ -48,6 +49,8 @@ def pregunta_02():
     ]
 
     """
+    #HELP
+
     data = open('data.csv','r').readlines()
     contador={}
     tupla = []
@@ -78,6 +81,8 @@ def pregunta_03():
     ]
 
     """
+    #WHATT
+
     data = open('data.csv','r').readlines()
     data=[z.replace('\n','') for z in data]
     data = [z.replace('\t','') for z in data]
@@ -121,6 +126,8 @@ def pregunta_04():
     ]
 
     """
+    #AUXILIPP
+    
     data = open('data.csv','r').readlines()
     data=[z.replace('\n','') for z in data]
     data=[z.replace('\t',';') for z in data]
@@ -157,6 +164,7 @@ def pregunta_05():
     ]
 
     """
+    #NODIOOOO
 
     from operator import itemgetter
     data = open('data.csv','r').readlines()
@@ -174,7 +182,7 @@ def pregunta_05():
         else:
             result[letra]=[valor]
     result=[(key, max(valor), min (valor))for key, valor in result.items()]
-    result= [result, key=itemgetter(0), reverse=False)]
+    #result= [result, key=itemgetter(0), reverse=False)]
 
     result
    
@@ -225,6 +233,8 @@ def pregunta_07():
     ]
 
     """
+    # WHY :(
+
     from operator import itemgetter
     data = open('data.csv','r').readlines()
     data=[z.replace('\n','') for z in data]
