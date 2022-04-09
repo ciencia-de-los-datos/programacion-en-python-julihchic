@@ -13,8 +13,6 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 """
 
 
-from operator import itemgetter
-from unittest import result
 
 
 def pregunta_01():
@@ -129,9 +127,8 @@ def pregunta_04():
     #AUXILIPP
     
     data = open('data.csv','r').readlines()
-    data=[z.replace('\n','') for z in data]
-    data=[z.replace('\t',';') for z in data]
-    data=[z.split(';') for z in data]
+    data=[x.replace('\n','') for x in data]
+    data=[x.split('\t') for x in data]
 
     tupla={}
 
@@ -166,25 +163,29 @@ def pregunta_05():
     """
     #NODIOOOO
 
-    from operator import itemgetter
-    data = open('data.csv','r').readlines()
-    data=[z.replace('\n','') for z in data]
-    data=[z.replace('\t',';') for z in data]
-    data=[z.split(';') for z in data] 
-        
-    result ={}
+
+    with open('data.csv','r') as file:
+        data= file.readlines()
+    data=[x.replace('\n','') for x in data]
+    data=[x.split('\t') for x in data] 
+    id_list=sorted(set([x[0] for x in data]))
+    lista_datos=[(x[0], int(x[1])) for x in data]    
+    
+    valor=[]
+    result=[]
         
 
-    for letra, valor in data:
-        valor = int(valor)
-        if letra in result.keys():
-            result[letra].append(valor)
-        else:
-            result[letra]=[valor]
-    result=[(key, max(valor), min (valor))for key, valor in result.items()]
-    #result= [result, key=itemgetter(0), reverse=False)]
-
-    result
+    for letra in id_list:
+        for num in lista_datos:
+             if num[0]==letra:
+                 valor.append(num[1])
+        
+        result.append((letra, max(valor), min(valor)))
+        valor.clear()
+    
+    return result
+            
+    
    
  
 def pregunta_06():
@@ -296,7 +297,7 @@ def pregunta_08():
     resultado=sorted(resultado, key=itemgetter(0), reverse=False)
 
 
-    return resultado
+    resultado
 
 
 def pregunta_09():
