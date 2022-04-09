@@ -291,8 +291,8 @@ def pregunta_08():
             resultado[valor].append(letra)
         else:
             resultado[valor]=[letra]
-    resultado=[(int(key), list(set(letra))) for key, letra in resultado.items()]
-    resultado=sorted(resultado, key=itemgetter(0), reverse=False)
+        resultado=[(int(key), list(set(letra))) for key, letra in resultado.items()]
+        resultado=sorted(resultado, key=itemgetter(0), reverse=False)
 
 
     return resultado
