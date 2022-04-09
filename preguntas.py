@@ -278,7 +278,24 @@ def pregunta_08():
     ]
 
     """
-    return
+    from operator import itemgetter
+    data = open('data.csv','r').readlines()
+    data=[z.replace('\n','') for z in data]
+    data=[z.replace('\t',';') for z in data]
+    data=[z.split(';') for z in data]
+
+    columns=[[row[1]]+[row[0]] for row in data]
+    resultado={}
+    for valor, letra in columns:
+        if valor in resultado.keys():
+            resultado[valor].append(letra)
+        else:
+            resultado[valor]=[letra]
+    resultado=[(int(key), list(set(letra))) for key, letra in resultado.items()]
+    resultado=sorted(resultado, key=itemgetter(0), reverse=False)
+
+
+    return resultado
 
 
 def pregunta_09():
