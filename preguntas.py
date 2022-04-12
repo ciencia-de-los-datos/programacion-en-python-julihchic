@@ -13,6 +13,8 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 """
 
 
+
+
 def pregunta_01():
     """
     Retorne la suma de la segunda columna.
@@ -21,7 +23,13 @@ def pregunta_01():
     214
 
     """
-    return
+    #OMG
+
+    data = open('data.csv','r').readlines()
+    col2 = [int(row[2]) for row in data]
+
+    suma = sum(col2)
+    return suma
 
 
 def pregunta_02():
@@ -39,8 +47,22 @@ def pregunta_02():
     ]
 
     """
-    return
+    #HELP
 
+    data = open('data.csv','r').readlines()
+    contador={}
+    tupla = []
+
+    for i in data:
+        mi_lista= i[0]
+        if mi_lista in contador.keys():
+            contador[mi_lista]= contador[mi_lista]+ 1
+        else:
+            contador[mi_lista] = 1
+        tupla=list(zip(contador.keys(),contador.values()))
+        tupla.sort()
+        
+    return tupla
 
 def pregunta_03():
     """
@@ -57,7 +79,27 @@ def pregunta_03():
     ]
 
     """
-    return
+    #WHATT
+
+    data = open('data.csv','r').readlines()
+    data=[z.replace('\n','') for z in data]
+    data = [z.replace('\t','') for z in data]
+
+    suma={}
+    tupla=[]
+
+
+    for i in data:
+        mi_tupla= i[0]
+        col1=int(i[1])
+        if mi_tupla in suma.keys():
+            suma[mi_tupla]= suma[mi_tupla]+ col1
+        else:
+            suma[mi_tupla]= col1
+        tupla=list(zip(suma.keys(),suma.values()))
+        tupla.sort()
+    return tupla
+
 
 
 def pregunta_04():
@@ -82,7 +124,26 @@ def pregunta_04():
     ]
 
     """
-    return
+    #AUXILIPP
+    
+    data = open('data.csv','r').readlines()
+    data=[x.replace('\n','') for x in data]
+    data=[x.split('\t') for x in data]
+
+    tupla={}
+
+    for row in data:
+        vble=row[2].split('-')
+        mes=vble[1]
+        if mes in tupla.keys():
+            tupla[mes]=tupla[mes]+1
+        else:
+             tupla[mes]=1
+
+    tupla=list(zip(tupla.keys(), tupla.values()))
+    tupla.sort()
+
+    return tupla
 
 
 def pregunta_05():
@@ -100,9 +161,33 @@ def pregunta_05():
     ]
 
     """
-    return
+    #NODIOOOO
 
 
+    with open('data.csv','r') as file:
+        data= file.readlines()
+    data=[x.replace('\n','') for x in data]
+    data=[x.split('\t') for x in data] 
+    id_list=sorted(set([x[0] for x in data]))
+    lista_datos=[(x[0], int(x[1])) for x in data]    
+    
+    valor=[]
+    result=[]
+        
+
+    for letra in id_list:
+        for num in lista_datos:
+             if num[0]==letra:
+                 valor.append(num[1])
+        
+        result.append((letra, max(valor), min(valor)))
+        valor.clear()
+    
+    return result
+            
+    
+   
+ 
 def pregunta_06():
     """
     La columna 5 codifica un diccionario donde cada cadena de tres letras corresponde a
@@ -125,7 +210,26 @@ def pregunta_06():
     ]
 
     """
-    return
+    with open('data.csv','r') as file:
+        data = file.readlines()
+    data=[x.replace('\n','') for x in data]
+    data=[x.split('\t') for x in data] 
+    mi_lista=[x[4].split(',') for x in data]
+
+    nueva_lista = [(j[:3], int(j[4:])) for i in mi_lista for j in i]
+    mi_dict = sorted(set(elm[0] for elm in nueva_lista))
+
+    result=[]
+    mi_tupla=[]
+
+    for letra in mi_dict:
+        for elm in nueva_lista:
+            if elm[0] == letra:
+                result.append(elm[1])
+        mi_tupla.append((letra, min(result), max(result)))
+        result.clear()
+
+    return mi_tupla
 
 
 def pregunta_07():
@@ -149,7 +253,27 @@ def pregunta_07():
     ]
 
     """
-    return
+    # WHY :(
+
+    from operator import itemgetter
+    data = open('data.csv','r').readlines()
+    data=[z.replace('\n','') for z in data]
+    data=[z.replace('\t',';') for z in data]
+    data=[z.split(';') for z in data] 
+
+    datos_siete=[[row[1]]+[row[0]] for row in data]
+    result={}
+    for valor, letra in datos_siete:
+        if valor in result.keys():
+            result[valor].append(letra)
+        else:
+            result[valor]=[letra]
+
+    result=[(int(key), letra) for key, letra in result.items()]
+    result=sorted(result, key=itemgetter(0), reverse=False)
+    
+
+    return result
 
 
 def pregunta_08():
@@ -174,7 +298,25 @@ def pregunta_08():
     ]
 
     """
-    return
+    with open('data.csv','r') as file:
+        data = file.readlines()
+    data=[x.replace('\n','') for x in data]
+    data=[x.split('\t') for x in data]
+    nuevos_datos=[(int(x[1]), x[0]) for x in data]
+    mi_data=sorted(set(x[0] for x in nuevos_datos))
+
+
+    result=[]
+    mi_tupla=[]
+
+    for x in mi_data:
+            for y in nuevos_datos:
+                    if y[0]-x==0:
+                            result.append(y[1])
+            mi_tupla.append((x, sorted(set(result))))
+            result=[]
+    
+    return mi_tupla
 
 
 def pregunta_09():
@@ -197,7 +339,18 @@ def pregunta_09():
     }
 
     """
-    return
+    with open('data.csv','r') as file:
+        data = file.readlines()
+    data=[x.replace('\n','') for x in data]
+    data=[x.split('\t') for x in data]
+    mi_data=[x[4].split(',') for x in data]
+
+    mi_lista=[(y[:3]) for x in mi_data for y in x]
+    mi_dict= sorted(set(elm for elm in mi_lista))
+    mi_tupla=[(x, mi_lista.count(x))for x in mi_dict]
+    dictionary=dict(mi_tupla)
+
+    return dictionary
 
 
 def pregunta_10():
@@ -218,7 +371,17 @@ def pregunta_10():
 
 
     """
-    return
+    with open('data.csv','r') as file:
+        data = file.readlines()
+    data=[x.replace('\n','') for x in data]
+    data=[x.split('\t') for x in data]
+    thirdcol=[len(x[3].split(',')) for x in data]
+    secondcol=[len(x[4].split(',')) for x in data]
+    firstcol=[x[0] for x in data]
+    mi_result=(list(zip(firstcol, thirdcol, secondcol)))
+
+    
+    return mi_result
 
 
 def pregunta_11():
@@ -239,7 +402,37 @@ def pregunta_11():
 
 
     """
-    return
+    with open('data.csv','r') as file:
+        data = file.readlines()
+    data=[x.replace('\n','') for x in data]
+    data=[x.split('\t') for x in data]
+    col2=[int(x[1]) for x in data]
+    col4=[x[3].split(',') for x in data]
+    d_l_n=list(zip(col4,col2))
+
+    l_l_n=[]
+    c=0
+
+    for elm in d_l_n:
+        for y in elm[c]:
+            l_l_n.append((y, elm[1]))
+            c += 1
+        c=0
+
+    dict2={}
+
+    for clave, valor in l_l_n:
+        if clave in dict2.keys():
+            dict2[clave] += valor
+        else:
+            dict2[clave] =valor
+
+    s_k= sorted(dict2)
+    dict2_s={}
+
+    for x in s_k:
+        dict2_s[x]=dict2[x]
+    return dict2_s
 
 
 def pregunta_12():
@@ -257,4 +450,27 @@ def pregunta_12():
     }
 
     """
-    return
+    with open('data.csv','r') as file:
+        data = file.readlines()
+    data=[x.replace('\n','') for x in data]
+    data=[x.split('\t') for x in data]
+    c1=[(x[0]) for x in data]
+    c5=[x[4].split(',') for x in data]
+    #con zip contraigo las columnas 1 y 5
+    d_l_n=list(zip(c1,c5))
+    #ordeno y saco un unico valor de c1
+    d_k=sorted(set(c1))
+
+    #creo diccionario vacio
+    mi_dict={}
+
+    for clave in d_k:
+        mi_dict[clave]=0
+        
+
+    for i, j in d_l_n:
+        for k in j:
+            mi_dict[i]+=int(k[4:])
+
+    return mi_dict
+ 
