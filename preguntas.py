@@ -454,19 +454,23 @@ def pregunta_12():
         data = file.readlines()
     data=[x.replace('\n','') for x in data]
     data=[x.split('\t') for x in data]
-    col1=[(x[0]) for x in data]
-    col5=[x[4].split(',') for x in data]
-    mi_data=list(zip(col1,col5))
+    c1=[(x[0]) for x in data]
+    c5=[x[4].split(',') for x in data]
+    #con zip contraigo las columnas 1 y 5
+    d_l_n=list(zip(c1,c5))
+    #ordeno y saco un unico valor de c1
+    d_k=sorted(set(c1))
 
-    d_k=sorted(set(col1))
-
+    #creo diccionario vacio
     mi_dict={}
 
-    for clave in mi_dict.keys():
-        mi_dict[clave] =0
+    for clave in d_k:
+        mi_dict[clave]=0
+        
 
-
-    for i, j in mi_data:
+    for i, j in d_l_n:
         for k in j:
-            mi_dict[i] += int(k[4:])
-    mi_dict
+            mi_dict[i]+=int(k[4:])
+
+    return mi_dict
+ 
