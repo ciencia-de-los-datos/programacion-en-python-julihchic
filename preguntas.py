@@ -210,7 +210,26 @@ def pregunta_06():
     ]
 
     """
-    return
+    with open('data.csv','r') as file:
+        data = file.readlines()
+    data=[x.replace('\n','') for x in data]
+    data=[x.split('\t') for x in data] 
+    mi_lista=[x[4].split(',') for x in data]
+
+    nueva_lista = [(j[:3], int(j[4:])) for i in mi_lista for j in i]
+    mi_dict = sorted(set(elm[0] for elm in nueva_lista))
+
+    result=[]
+    mi_tupla=[]
+
+    for letra in mi_dict:
+        for elm in nueva_lista:
+            if elm[0] == letra:
+                result.append(elm[1])
+        mi_tupla.append((letra, min(result), max(result)))
+        result.clear()
+
+    return mi_tupla
 
 
 def pregunta_07():
@@ -279,25 +298,25 @@ def pregunta_08():
     ]
 
     """
-    from operator import itemgetter
-    data = open('data.csv','r').readlines()
-    data=[z.replace('\n','') for z in data]
-    data=[z.replace('\t',';') for z in data]
-    data=[z.split(';') for z in data]
-
-    columns=[[row[1]]+[row[0]] for row in data]
-    resultado={}
-    for valor, letra in columns:
-        if valor in resultado.keys():
-            resultado[valor].append(letra)
-        else:
-            resultado[valor]=[letra]
-            
-    resultado=[(int(key), list(set(letra))) for key, letra in resultado.items()]
-    resultado=sorted(resultado, key=itemgetter(0), reverse=False)
+    with open('data.csv','r') as file:
+        data = file.readlines()
+    data=[x.replace('\n','') for x in data]
+    data=[x.split('\t') for x in data]
+    nuevos_datos=[(int(x[1]), x[0]) for x in data]
+    mi_data=sorted(set(x[0] for x in nuevos_datos))
 
 
-    resultado
+    result=[]
+    mi_tupla=[]
+
+    for x in mi_data:
+            for y in nuevos_datos:
+                    if y[0]-x==0:
+                            result.append(y[1])
+            mi_tupla.append((x, sorted(set(result))))
+            result=[]
+    
+    return mi_tupla
 
 
 def pregunta_09():
@@ -320,7 +339,18 @@ def pregunta_09():
     }
 
     """
-    return
+    with open('data.csv','r') as file:
+        data = file.readlines()
+    data=[x.replace('\n','') for x in data]
+    data=[x.split('\t') for x in data]
+    mi_data=[x[4].split(',') for x in data]
+
+    mi_lista=[(y[:3]) for x in mi_data for y in x]
+    mi_dict= sorted(set(elm for elm in mi_lista))
+    mi_tupla=[(x, mi_lista.count(x))for x in mi_dict]
+    dictionary=dict(mi_tupla)
+
+    return dictionary
 
 
 def pregunta_10():
