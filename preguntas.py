@@ -371,7 +371,17 @@ def pregunta_10():
 
 
     """
-    return
+    with open('data.csv','r') as file:
+        data = file.readlines()
+    data=[x.replace('\n','') for x in data]
+    data=[x.split('\t') for x in data]
+    thirdcol=[len(x[3].split(',')) for x in data]
+    secondcol=[len(x[4].split(',')) for x in data]
+    firstcol=[x[0] for x in data]
+    mi_result=(list(zip(firstcol, thirdcol, secondcol)))
+
+    
+    return mi_result
 
 
 def pregunta_11():
@@ -392,7 +402,37 @@ def pregunta_11():
 
 
     """
-    return
+    with open('data.csv','r') as file:
+        data = file.readlines()
+    data=[x.replace('\n','') for x in data]
+    data=[x.split('\t') for x in data]
+    col2=[int(x[1]) for x in data]
+    col4=[x[3].split(',') for x in data]
+    d_l_n=list(zip(col4,col2))
+
+    l_l_n=[]
+    c=0
+
+    for elm in d_l_n:
+        for y in elm[c]:
+            l_l_n.append((y, elm[1]))
+            c += 1
+        c=0
+
+    dict2={}
+
+    for clave, valor in l_l_n:
+        if clave in dict2.keys():
+            dict2[clave] += valor
+        else:
+            dict2[clave] =valor
+
+    s_k= sorted(dict2)
+    dict2_s={}
+
+    for x in s_k:
+        dict2_s[x]=dict2[x]
+    return dict2_s
 
 
 def pregunta_12():
@@ -410,4 +450,23 @@ def pregunta_12():
     }
 
     """
-    return
+    with open('data.csv','r') as file:
+        data = file.readlines()
+    data=[x.replace('\n','') for x in data]
+    data=[x.split('\t') for x in data]
+    col1=[(x[0]) for x in data]
+    col5=[x[4].split(',') for x in data]
+    mi_data=list(zip(col1,col5))
+
+    d_k=sorted(set(col1))
+
+    mi_dict={}
+
+    for clave in mi_dict.keys():
+        mi_dict[clave] =0
+
+
+    for i, j in mi_data:
+        for k in j:
+            mi_dict[i] += int(k[4:])
+    mi_dict
